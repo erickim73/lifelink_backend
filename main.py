@@ -13,7 +13,7 @@ model = Llama(model_path=model_path, n_ctx=2048, n_threads=8, n_batch=8, tempera
 @app.route('/chat', methods=['POST'])
 def generate_reply():
     data = request.get_json()
-    prompt_text = data.get('prompt', '')
+    prompt_text = data.get('newPrompt', '')
     prompt = (
         "<>[INST] You are a helpful medical assistant. "
         "Answer the user's question based on the provided context if any. "
@@ -22,7 +22,7 @@ def generate_reply():
     
     output = model(prompt=prompt, max_tokens=512)
     return jsonify({
-        "response": output['choices'][0]['text']
+        "response": output['choices'][0]['text'],
     })
     
 if __name__ == '__main__':
