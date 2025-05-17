@@ -9,6 +9,7 @@ CORS(app, origins=["http://localhost:3000"])
 
 model_path = "./mistral-7b-q4km.gguf"
 
+model = Llama(model_path=model_path, n_ctx=32768, n_threads=12, n_batch=64, temperature=0.7, top_p=0.95, repeat_penalty=1.2, verbose=False, cache=True)
 
 def calculate_age(dob: str) -> int:
     birthdate = datetime.strptime(dob, "%Y-%m-%d")
